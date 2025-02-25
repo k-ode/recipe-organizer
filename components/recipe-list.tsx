@@ -56,7 +56,7 @@ export async function RecipeList({
             </div>
           </div>
           <Link
-            href={`/recipe/${recipe.id}`}
+            href={`/recipe/${recipe.slug}`}
             className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium transition-colors"
           >
             Redigera
