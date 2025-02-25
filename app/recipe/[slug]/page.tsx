@@ -23,6 +23,7 @@ export default async function SharedRecipePage(props: Props) {
   const handleUpdate = async (
     updatedRecipe: Partial<Recipe> & { id: number }
   ) => {
+    "use server";
     await updateRecipe(
       updatedRecipe.id,
       updatedRecipe.title,

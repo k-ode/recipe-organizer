@@ -84,7 +84,7 @@ Include a database migration for the slug column. Show how you ensure uniqueness
 
 Finally, let's apply TailwindCSS and add inline error messages in Swedish:
 
-1. Update all existing pages (`app/page.tsx`, `app/recipe/[id]/page.tsx`, `app/recipe/[slug]/page.tsx`) to have playful Tailwind styling.
+1. Update all existing pages (`app/page.tsx`, `app/recipe/[slug]/page.tsx`) to have playful Tailwind styling.
 2. For error handling (e.g., if an update fails), display inline error messages in Swedish. For example, "Ett fel uppstod vid uppdatering."
 3. Ensure all field labels, placeholders, and button text are in Swedish.
 4. Generate the final code for all updated files, with a brief explanation of the design approach.
