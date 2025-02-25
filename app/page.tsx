@@ -1,19 +1,39 @@
-import { getTodos } from '@/lib/db/queries';
-import TodoList from './todo-list';
+import { RecipeList } from "@/components/recipe-list";
+import { RecipeForm } from "@/components/recipe-form";
+import { RecipeSearch } from "@/components/recipe-search";
+import { Suspense } from "react";
+import { getFilteredRecipes } from "@/lib/actions/recipes";
 
-// This will be replaced by 'use cache' soon
-export const dynamic = 'force-static';
+type Props = {
+  searchParams: { 
+    q?: string;
+    sort?: 'date' | 'label';
+    order?: 'asc' | 'desc';
+  };
+};
 
-export default async function Home() {
-  const todos = await getTodos();
-
+export default function Home({ searchParams }: Props) {
   return (
     <div className="min-h-screen p-8 bg-gray-900">
-      <main className="max-w-[350px] mx-auto">
-        <h1 className="text-2xl font-bold mb-4 text-center text-gray-100">
-          Postgres Starter
-        </h1>
-        <TodoList initialTodos={todos} />
+      <main className="max-w-4xl mx-auto p-4">
+        <h1 className="text-2xl font-bold mb-8">Mina Recept</h1>
+
+        <div className="mb-8">
+          <h2 className="text-xl font-semibold mb-4">Lägg till nytt recept</h2>
+          <RecipeForm />
+        </div>
+
+        <div>
+          <h2 className="text-xl font-semibold mb-4">Sparade recept</h2>
+          <RecipeSearch />
+          <Suspense fallback={<div>Laddar recept...</div>}>
+            <RecipeList 
+              search={searchParams.q}
+              sortBy={searchParams.sort}
+              order={searchParams.order}
+            />
+          </Suspense>
+        </div>
       </main>
     </div>
   );
