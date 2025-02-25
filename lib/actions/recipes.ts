@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { eq, or, sql, asc, desc } from "drizzle-orm";
 import { db } from "@/lib/db/drizzle";
 import { recipes } from "@/lib/db/schema";
+import { nanoid } from "nanoid";
 
 export type Recipe = typeof recipes.$inferSelect;
 
@@ -15,6 +16,8 @@ export async function createRecipe(
   url: string,
   labels: string[]
 ): Promise<Recipe> {
+  const slug = nanoid(); // Generates a unique 21-character string
+
   const [newRecipe] = await db
     .insert(recipes)
     .values({
@@ -22,6 +25,7 @@ export async function createRecipe(
       url,
       labels,
       dateAdded: new Date(),
+      slug,
     })
     .returning();
 
@@ -37,6 +41,14 @@ export async function getRecipes(): Promise<Recipe[]> {
 export async function getRecipeById(id: number): Promise<Recipe | null> {
   const recipe = await db.query.recipes.findFirst({
     where: eq(recipes.id, id),
+  });
+
+  return recipe ?? null;
+}
+
+export async function getRecipeBySlug(slug: string): Promise<Recipe | null> {
+  const recipe = await db.query.recipes.findFirst({
+    where: eq(recipes.slug, slug),
   });
 
   return recipe ?? null;

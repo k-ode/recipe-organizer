@@ -133,21 +133,21 @@ This document serves as a comprehensive checklist to guide you step-by-step thro
 
 ## Chunk 7: Share Links
 
-- [ ] **Add `slug` Column**
-  - [ ] Update `recipes` schema to include `slug` (unique, not null).
-  - [ ] Generate a new migration, run it.
+- [x] **Add `slug` Column**
+  - [x] Update `recipes` schema to include `slug` (unique, not null).
+  - [x] Generate a new migration, run it.
 
-- [ ] **Generate Slugs**
-  - [ ] Use a library like `nanoid` (or a custom function) in `createRecipe` to set `slug`.
-  - [ ] Ensure uniqueness (either by library or checking DB collisions).
+- [x] **Generate Slugs**
+  - [x] Use a library like `nanoid` (or a custom function) in `createRecipe` to set `slug`.
+  - [x] Ensure uniqueness (either by library or checking DB collisions).
 
-- [ ] **Shareable Route**
-  - [ ] Create `app/recipe/[slug]/page.tsx`.
-  - [ ] Fetch recipe by slug, not by ID.
-  - [ ] Show same editing form as the ID route.
+- [x] **Shareable Route**
+  - [x] Create `app/recipe/[slug]/page.tsx`.
+  - [x] Fetch recipe by slug, not by ID.
+  - [x] Show same editing form as the ID route.
 
-- [ ] **Test**
-  - [ ] Confirm that sharing `/recipe/[slug]` works the same as `[id]` route for reading and editing.
+- [x] **Test**
+  - [x] Confirm that sharing `/recipe/[slug]` works the same as `[id]` route for reading and editing.
 
 ---
 

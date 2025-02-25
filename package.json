@@ -19,6 +19,7 @@
     "drizzle-kit": "0.30.4",
     "drizzle-orm": "0.39.3",
     "lucide-react": "^0.465.0",
+    "nanoid": "5.1.2",
     "next": "15.1.7",
     "postgres": "^3.4.5",
     "react": "19.0.0",

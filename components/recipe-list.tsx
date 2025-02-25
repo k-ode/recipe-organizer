@@ -18,6 +18,11 @@ export async function RecipeList({
 }: Props) {
   const recipes = await getFilteredRecipes(search, sortBy, order);
 
+  const copyShareLink = async (slug: string) => {
+    const url = `${window.location.origin}/recipe/${slug}`;
+    await navigator.clipboard.writeText(url);
+  };
+
   if (recipes.length === 0) {
     return <p className="text-gray-500 italic">Inga recept hittades...</p>;
   }
@@ -56,6 +61,12 @@ export async function RecipeList({
           >
             Redigera
           </Link>
+          <button
+            onClick={() => copyShareLink(recipe.slug)}
+            className="bg-blue-100 hover:bg-blue-200 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+          >
+            Kopiera delningslänk
+          </button>
         </div>
       ))}
     </div>
