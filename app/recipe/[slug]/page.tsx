@@ -7,12 +7,13 @@ import {
 import { notFound } from "next/navigation";
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
-export default async function SharedRecipePage({ params }: Props) {
+export default async function SharedRecipePage(props: Props) {
+  const params = await props.params;
   const recipe = await getRecipeBySlug(params.slug);
 
   if (!recipe) {
