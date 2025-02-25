@@ -1,5 +1,9 @@
-import { getFilteredRecipes } from '@/lib/actions/recipes';
-import type { SortField, SortOrder } from '@/lib/actions/recipes';
+import {
+  getFilteredRecipes,
+  type SortField,
+  type SortOrder,
+} from "@/lib/actions/recipes";
+import Link from "next/link";
 
 type Props = {
   search?: string;
@@ -7,7 +11,11 @@ type Props = {
   order?: SortOrder;
 };
 
-export async function RecipeList({ search, sortBy = 'date', order = 'desc' }: Props) {
+export async function RecipeList({
+  search,
+  sortBy = "date",
+  order = "desc",
+}: Props) {
   const recipes = await getFilteredRecipes(search, sortBy, order);
 
   if (recipes.length === 0) {
@@ -17,18 +25,37 @@ export async function RecipeList({ search, sortBy = 'date', order = 'desc' }: Pr
   return (
     <div className="space-y-4">
       {recipes.map((recipe) => (
-        <div key={recipe.id} className="border p-4 rounded-lg">
-          <h2 className="font-bold">{recipe.title}</h2>
-          <a href={recipe.url} className="text-blue-500 hover:underline" target="_blank" rel="noopener noreferrer">
-            {recipe.url}
-          </a>
-          <div className="mt-2 flex gap-2">
-            {recipe.labels?.map((label) => (
-              <span key={label} className="bg-gray-100 px-2 py-1 rounded-full text-sm">
-                {label}
-              </span>
-            ))}
+        <div
+          key={recipe.id}
+          className="border p-4 rounded-lg flex justify-between items-start"
+        >
+          <div>
+            <h2 className="font-bold">{recipe.title}</h2>
+            <a
+              href={recipe.url}
+              className="text-blue-500 hover:underline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {recipe.url}
+            </a>
+            <div className="mt-2 flex gap-2">
+              {recipe.labels?.map((label) => (
+                <span
+                  key={label}
+                  className="bg-gray-100 px-2 py-1 rounded-full text-sm"
+                >
+                  {label}
+                </span>
+              ))}
+            </div>
           </div>
+          <Link
+            href={`/recipe/${recipe.id}`}
+            className="bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-md text-sm font-medium transition-colors"
+          >
+            Redigera
+          </Link>
         </div>
       ))}
     </div>

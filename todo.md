@@ -104,9 +104,9 @@ This document serves as a comprehensive checklist to guide you step-by-step thro
   - [x] Allow removing labels (e.g., via a small "x" button next to each label).
   - [x] Ensure they update via the `updateRecipe` action.
 
-- [ ] **Navigation**
-  - [ ] From the main page's recipe list, create a link/button to `/recipe/[id]`.
-  - [ ] Confirm you can navigate, edit the recipe, and changes persist to the DB.
+- [X] **Navigation**
+  - [X] From the main page's recipe list, create a link/button to `/recipe/[id]`.
+  - [X] Confirm you can navigate, edit the recipe, and changes persist to the DB.
 
 ---
 

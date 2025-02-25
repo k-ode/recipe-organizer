@@ -2,17 +2,17 @@ import { RecipeList } from "@/components/recipe-list";
 import { RecipeForm } from "@/components/recipe-form";
 import { RecipeSearch } from "@/components/recipe-search";
 import { Suspense } from "react";
-import { getFilteredRecipes } from "@/lib/actions/recipes";
 
 type Props = {
-  searchParams: { 
+  searchParams: Promise<{
     q?: string;
-    sort?: 'date' | 'label';
-    order?: 'asc' | 'desc';
-  };
+    sort?: "date" | "label";
+    order?: "asc" | "desc";
+  }>;
 };
 
-export default function Home({ searchParams }: Props) {
+export default async function Home(props: Props) {
+  const searchParams = await props.searchParams;
   return (
     <div className="min-h-screen p-8 bg-gray-900">
       <main className="max-w-4xl mx-auto p-4">
@@ -27,7 +27,7 @@ export default function Home({ searchParams }: Props) {
           <h2 className="text-xl font-semibold mb-4">Sparade recept</h2>
           <RecipeSearch />
           <Suspense fallback={<div>Laddar recept...</div>}>
-            <RecipeList 
+            <RecipeList
               search={searchParams.q}
               sortBy={searchParams.sort}
               order={searchParams.order}
